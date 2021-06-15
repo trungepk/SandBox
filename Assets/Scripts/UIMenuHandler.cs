@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
 using UnityEngine.SceneManagement;
 
 #if UNITY_EDITOR
@@ -9,20 +11,19 @@ using UnityEditor;
 
 public class UIMenuHandler : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public TMP_InputField nameInput;
 
-    // Update is called once per frame
-    void Update()
+    private void Start()
     {
-        
+        if (!string.IsNullOrEmpty(MainManager.Instance.playerName) && !MainManager.Instance.playerName.Equals("Anonymous"))
+        {
+            nameInput.text = MainManager.Instance.playerName;
+        }
     }
 
     public void StartNew()
     {
+        MainManager.Instance.playerName = !string.IsNullOrEmpty(nameInput.text) ? nameInput.text : "Anonymous";
         SceneManager.LoadScene(1);
     }
 

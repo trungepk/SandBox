@@ -17,4 +17,8 @@ public class MainManager : MonoBehaviour
         Instance = this;
         DontDestroyOnLoad(gameObject);
     }
+
+    public string playerName;
+    public int score;
+
 }
