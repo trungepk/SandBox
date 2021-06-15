@@ -33,12 +33,13 @@ public class PlayerController : MonoBehaviour
         playerRb = GetComponent<Rigidbody>();
         playerAnim = GetComponent<Animator>();
         audioSource = GetComponent<AudioSource>();
-        Physics.gravity *= gravityModifier;
+        //Physics.gravity *= gravityModifier;
 
         startPos = transform.position;
         fromPos = new Vector3(-6, 0, 0);
         transform.position = fromPos;
         scoreTxt.text = "Score: " + 0;
+        gameOver = false;
         gameOverText.SetActive(false);
         StartCoroutine(MoveOverSeconds(gameObject, startPos, 2f));
     }
@@ -101,12 +102,26 @@ public class PlayerController : MonoBehaviour
         {
             Debug.LogError("Game Over");
             gameOver = true;
+            SaveHighestScoreData();
             playerAnim.SetBool("Death_b", true);
             playerAnim.SetInteger("DeathType_int", 1);
             explosion.Play();
             dirt.Stop();
             audioSource.PlayOneShot(crashSound, 1f);
             gameOverText.SetActive(true);
+        }
+    }
+
+    private void SaveHighestScoreData()
+    {
+        if (MainManager.Instance)
+        {
+            if ((int)(score * 100) > MainManager.Instance.highestScore)
+            {
+                MainManager.Instance.highestScore = (int)(score * 100);
+                MainManager.Instance.topPlayerName = MainManager.Instance.curPlayerName;
+                MainManager.Instance.SavePlayerAndScore();
+            }
         }
     }
 }

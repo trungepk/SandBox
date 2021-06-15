@@ -1663,6 +1663,11 @@ PrefabInstance:
       objectReference: {fileID: 348098258}
     - target: {fileID: 4274273216329435872, guid: 00d3e009f88421144a680e4f3972d1d4,
         type: 3}
+      propertyPath: jumpForce
+      value: 430
+      objectReference: {fileID: 0}
+    - target: {fileID: 4274273216329435872, guid: 00d3e009f88421144a680e4f3972d1d4,
+        type: 3}
       propertyPath: gameOverText
       value: 
       objectReference: {fileID: 1271693451}
